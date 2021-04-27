@@ -37,5 +37,8 @@ class CircleManager {
         Logger.log("Circles list after new member adding: $circles")
     }
 
-
+    @Synchronized
+    fun printCirclesList() {
+        Logger.log("Circles list: $circles")
+    }
 }
