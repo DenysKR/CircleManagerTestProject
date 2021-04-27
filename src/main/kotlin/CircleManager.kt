@@ -1,5 +1,6 @@
 import model.Circle
 import model.Member
+import utils.Logger
 
 class CircleManager {
 
@@ -9,23 +10,20 @@ class CircleManager {
     fun createAndAddCircle(id: Int, name: String = "", members: MutableList<Member> = mutableListOf<Member>()) {
         val circle = Circle(id, name = name, members = members)
         circles.add(circle)
-        print("Circles list after adding new element: $circles")
-        println()
+        Logger.log("Circles list after adding new element: $circles")
 
     }
 
     @Synchronized
     fun deleteCircle(id: Int) {
         circles.removeIf { it.id == id }
-        print("Circles list after deletion: $circles")
-        println()
+        Logger.log("Circles list after deletion: $circles")
     }
 
     @Synchronized
     fun queryCirclesByMemberCount(count: Int) {
         val filtered = circles.filter { it.members.size == count }
-        print("Circles list after quering: $filtered")
-        println()
+        Logger.log("Circles list after query execution: $filtered")
     }
 
     @Synchronized
@@ -36,9 +34,7 @@ class CircleManager {
         } else {
             createAndAddCircle(circleId, members = mutableListOf(member))
         }
-
-        print("Circles list after new member adding: $circles")
-        println()
+        Logger.log("Circles list after new member adding: $circles")
     }
 
 
