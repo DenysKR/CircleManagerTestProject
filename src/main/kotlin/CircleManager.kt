@@ -41,4 +41,30 @@ class CircleManager {
     fun printCirclesList() {
         Logger.log("Circles list: $circles")
     }
+
+    @Synchronized
+    fun duplicatesCount() {
+        var duplicatesCounter = 0
+        var i = 0
+
+        while (i < circles.size) {
+            var circle = circles[i]
+            var j = i
+            var duplicatesCounterInner = 0
+
+            while (j < circles.size) {
+                var nextCircle = circles[j]
+
+                if (circle == nextCircle) {
+                    duplicatesCounterInner++
+                }
+
+                if (duplicatesCounterInner > duplicatesCounter)
+                    duplicatesCounter = duplicatesCounterInner
+                j++
+            }
+            i++
+        }
+        Logger.log("Duplicates count: $duplicatesCounter")
+    }
 }
