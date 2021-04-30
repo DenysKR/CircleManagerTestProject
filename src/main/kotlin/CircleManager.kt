@@ -21,9 +21,10 @@ class CircleManager {
     }
 
     @Synchronized
-    fun queryCirclesByMemberCount(count: Int) {
-        val filtered = circles.filter { it.members.size == count }
-        Logger.log("Circles list after query execution: $filtered")
+    fun queryCirclesByMemberCount(count: Int): Int {
+        val result = circles.filter { it.members.size == count }.size
+        Logger.log("Circles list size after query execution: $result")
+        return result
     }
 
     @Synchronized
@@ -58,7 +59,7 @@ class CircleManager {
     }
 
     @Synchronized
-    fun duplicatesCount() {
+    fun duplicatesCount(): Int {
         var duplicatesCounter = 0
         var i = 0
 
@@ -81,6 +82,7 @@ class CircleManager {
             i++
         }
         Logger.log("Duplicates count: $duplicatesCounter")
+        return duplicatesCounter
     }
 
     @Synchronized
@@ -107,6 +109,8 @@ class CircleManager {
             }
             i++
         }
-        Logger.log("Remove duplicates result: $result")
+        circles.apply { clear()
+            addAll (result) }
+        Logger.log("Remove duplicates result: $circles")
     }
 }

@@ -9,5 +9,4 @@ fun main(args: Array<String>) {
     m.createAndAddCircle(id = 3, "Circle 3", members = mutableListOf(Member(1), Member(2), Member(3)))
 
     m.removeDuplicates()
-
 }
