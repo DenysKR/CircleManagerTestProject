@@ -82,4 +82,31 @@ class CircleManager {
         }
         Logger.log("Duplicates count: $duplicatesCounter")
     }
+
+    @Synchronized
+    fun removeDuplicates() {
+        val result = mutableListOf<Circle>().apply { addAll(circles) }
+
+        var i = 0
+
+        while (i < circles.size) {
+            var circle = circles[i]
+            var j = i + 1
+
+            while (j < circles.size) {
+                var nextCircle = circles[j]
+
+                if (circle.id == nextCircle.id) {
+                    when (true) {
+                        circle.members.size < nextCircle.members.size -> result.remove(circle)
+                        circle.members.size > nextCircle.members.size -> result.remove(nextCircle)
+                        else -> result.remove(nextCircle)
+                    }
+                }
+                j++
+            }
+            i++
+        }
+        Logger.log("Remove duplicates result: $result")
+    }
 }
