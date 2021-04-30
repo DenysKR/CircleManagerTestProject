@@ -43,6 +43,21 @@ class CircleManager {
     }
 
     @Synchronized
+    fun removeMemberById(circleId: Int, member: Member) {
+        if (circles.isNotEmpty()) {
+            val filtered = circles.findLast { it.id == circleId }
+            filtered?.members?.let {
+                with(it) {
+                    remove(member)
+                    if (isEmpty())
+                        circles.remove(filtered)
+                }
+            }
+        }
+        Logger.log("Circles list after member removing: $circles")
+    }
+
+    @Synchronized
     fun duplicatesCount() {
         var duplicatesCounter = 0
         var i = 0
