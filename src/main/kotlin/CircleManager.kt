@@ -4,14 +4,14 @@ import utils.Logger
 
 class CircleManager {
 
-    private val circles by lazy { mutableListOf<Circle>() }
+    val circles by lazy { mutableListOf<Circle>() }
 
     @Synchronized
-    fun createAndAddCircle(id: Int, name: String = "", members: MutableList<Member> = mutableListOf<Member>()) {
+    fun createAndAddCircle(id: Int, name: String = "", members: MutableList<Member> = mutableListOf<Member>()): Circle {
         val circle = Circle(id, name = name, members = members)
         circles.add(circle)
         Logger.log("Circles list after adding new element: $circles")
-
+        return circle
     }
 
     @Synchronized
